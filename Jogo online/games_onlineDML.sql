@@ -12,8 +12,9 @@
 -- se épico ->  id_ classe= xx3;
 -- se lendário -> id_classe = xx4;
 
+USE db_generation_game_online;
 -- popule esta tabela com até 5 dados
-INSERT INTO tb_classe (id_classe, tipo_ataque, terrestre_ou_aereo, raridade) 
+INSERT INTO tb_classe (id_classe,  tipo_ataque, terrestre_ou_aereo, raridade) 
 VALUES
 
 (111,"Corpo a corpo", "Terrestre", "Comum"),
@@ -48,30 +49,38 @@ VALUES
 (323,"Longo alcance", "Aéreo", "Épico"),
 (324,"Longo alcance", "Aéreo", "Lendário");
 
+SELECT * FROM tb_classe;
 
 -- pupule essa tabela com até 8 dados
-INSERT INTO tb_personagens (nome, arena_de_desbloqueio, dano, nivel,velocidade, fk_classe)
+INSERT INTO tb_personagens (nome, vida, dano, nivel, velocidade, fk_classe)
 VALUES
-("Arqueira",1,304, 11, "Média", 211),
-("Princesa", 5,  140, 9, "Média",314),
-("Lançador" , 13, 262, 10, "Lento" , 213),
-("Três mosqueteiras" , 7, 720,11, "Média" , 212),
-("Morcegos", 5,67, 9,"Muito Rápido" , 121),
-("Curadoura" , 15 , 123,9, "Média" , 122),
-("Lava-Hound", 10, 45 , 9 , "Lento" , 124),
-("Horda de Servos" , 10, 190 , 9 , "Rápida" , 121);
+("Arqueira", 304, 304, 11, "Média", 211),
+("Princesa", 261, 169, 11, "Média", 314),
+("Lançador", 1898, 262, 10, "Lento", 213),
+("Três mosqueteiras", 720, 218, 11,"Média", 212),
+("Morcegos", 67, 67, 9, "Muito Rápido", 121),
+("Curadoura", 1296, 112, 8,"Média", 122),
+("Lava-Hound", 3150, 45, 9, "Lento", 124),
+("Horda de Servos", 230, 102, 11, "Rápida", 121);
 
--- faça um SELECT que retorne os personagens com dano maior que 2000
-SELECT * FROM tb_personagens WHERE dano>2000;
+SELECT * FROM TB_PERSONAGENS;
+
+-- faça um SELECT que retorne os personagens com dano maior que 300
+SELECT * FROM tb_personagens WHERE dano>300;
+
+-- faã um SELECT que retorne os personagens com vida entre 500 e 1000
+SELECT *FROM tb_personagens
+WHERE vida BETWEEN 500 AND 1000; 
 
 -- faça um SELECT usando LIKE buscando personagens com a letra c.alter
-SELECT tb_personagens.nome , tb_personagem.dano, tb_personagens.nivel
+SELECT tb_personagens.nome , tb_personagens.dano, tb_personagens.nivel
 FROM tb_personagens
-WHERE tb_personagens.nome LIKE "%C%";
+WHERE tb_personagens.nome LIKE "C%";
 
 -- faça um SELECT com inner join entre tabela classe e personagem
-SELECT * FROM tb_personagens
-INNER JOIN tb_classe ON tb_personagens.fk_classe = tb_classe.id;
+SELECT tb_personagens.nome, tb_personagens.vida, tb_personagens.dano
+FROM tb_personagens
+INNER JOIN tb_classe ON tb_personagens.fk_classe = tb_classe.id_classe;
 
--- Faça um SELECT onde traga todos os personagens de uma classe específica (Exemplo: todos os personagens que são arqueiros).
+-- Faça um SELECT onde traga todos os persontb_classeagens de uma classe específica (Exemplo: todos os personagens que são arqueiros).
 SELECT * FROM tb_personagens WHERE fk.classe = 121;
